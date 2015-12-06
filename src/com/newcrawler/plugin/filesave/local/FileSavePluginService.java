@@ -19,6 +19,8 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.soso.plugin.bo.FileSavePluginBo;
+
 public final class FileSavePluginService implements com.soso.plugin.FileSavePlugin{
 	private static Log logger=LogFactory.getLog(FileSavePluginService.class);
 	
@@ -49,7 +51,11 @@ public final class FileSavePluginService implements com.soso.plugin.FileSavePlug
 		System.out.println(responseItem.getRealUrl());
 		System.out.println(responseItem.getFileByte());
 	}
-	public String execute(final Map<String, String> properties, final String fileUrl, final com.soso.plugin.FileSavePlugin.FileDownloadStatusService fileDownloadStatusService) {
+	public String execute(final FileSavePluginBo fileSavePluginBo) {
+		final Map<String, String> properties=fileSavePluginBo.getProperties();
+		final String fileUrl=fileSavePluginBo.getUrlString();
+		final com.soso.plugin.FileSavePlugin.FileDownloadStatusService fileDownloadStatusService=fileSavePluginBo.getFileDownloadStatusService();
+		
 		String saveDir=".";
 		String saveSubDir="";
 		String absolutePath="";
